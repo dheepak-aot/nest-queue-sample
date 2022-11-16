@@ -6,10 +6,20 @@ import Redis from 'ioredis';
   imports: [
     BullModule.forRootAsync({
       useFactory: () => ({
-        redis: {
-          host: process.env.REDIS_HOST,
-          port: +process.env.REDIS_PORT,
-          password: process.env.REDIS_PASSWORD,
+        createClient: () => {
+          if (process.env.NODE_ENV === 'production') {
+            return new Redis.Cluster(
+              [{ host: process.env.REDIS_HOST, port: +process.env.REDIS_PORT }],
+              { redisOptions: { password: process.env.REDIS_PASSWORD } },
+            );
+          }
+          return new Redis({
+            host: process.env.REDIS_HOST,
+            port: +process.env.REDIS_PORT,
+            password: process.env.REDIS_PASSWORD,
+            enableReadyCheck: null,
+            maxRetriesPerRequest: null,
+          });
         },
         prefix: '${sims}',
       }),
