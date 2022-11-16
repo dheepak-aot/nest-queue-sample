@@ -4,9 +4,13 @@ FROM node:16
 
 # Application Port
 ENV PORT 3000
+
 ENV NODE_ENV production
+
 ENV REDIS_HOST redis
+
 ENV REDIS_PORT 6397
+
 ENV REDIS_PASSWORD RineuDthI1c38pVDkNPcOmrBLYKkaFgW
 
 
@@ -20,7 +24,7 @@ RUN npm ci
 COPY . .
 
 # Building app
-RUN npm run build api
+RUN npm run build
 
 # Exposing application port
 EXPOSE ${PORT}
