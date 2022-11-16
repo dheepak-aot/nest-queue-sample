@@ -30,4 +30,4 @@ RUN npm run build
 EXPOSE ${PORT}
 
 # Entry point
-CMD [ "npm", "run", "start" ]
+CMD [ "nest", "start" ]
