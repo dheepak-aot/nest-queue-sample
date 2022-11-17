@@ -30,6 +30,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "bull": "^4.10.1",
+    "express-basic-auth": "^1.2.1",
     "ioredis": "^5.2.4",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

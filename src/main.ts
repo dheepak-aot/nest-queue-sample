@@ -5,6 +5,7 @@ import { Queue } from 'bull';
 import { createBullBoard } from '@bull-board/api';
 import { BullAdapter } from '@bull-board/api/bullAdapter';
 import { Queues } from './queue.constant';
+import * as basicAuth from 'express-basic-auth';
 require('../env-setup');
 
 async function bootstrap() {
@@ -21,7 +22,11 @@ async function bootstrap() {
     serverAdapter,
   });
 
-  app.use('/admin/queues', serverAdapter.getRouter());
+  app.use(
+    '/admin/queues',
+    basicAuth({ users: { foo: 'bar' }, challenge: true }),
+    serverAdapter.getRouter(),
+  );
   await app.listen(3000);
 }
 bootstrap();
