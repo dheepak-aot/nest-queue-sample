@@ -20,6 +20,7 @@ function createConnectionFactory():
     password: process.env.REDIS_PASSWORD,
   };
   if (process.env.REDIS_CLUSTER_ENABLED === 'true') {
+    console.log('cluster mode active');
     return {
       createClient: (): Redis | Cluster => {
         return new Redis.Cluster(
@@ -35,6 +36,7 @@ function createConnectionFactory():
       prefix: '${sims}',
     };
   }
+  console.log('stand alone mode active');
   return {
     redis: redisConnectionOptions,
   };
